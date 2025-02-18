@@ -1,0 +1,83 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - test/v1.0.0
+      - prod/v1.0.0
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  # Job for installing dependencies and running tests
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Specify your Node version
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./host-app  # Repeat or parameterize for each project if needed
+
+      - name: Run Lint
+        run: npm run lint
+        working-directory: ./host-app
+
+      - name: Run Tests
+        run: npm test
+        working-directory: ./host-app
+
+  # Job for building the application
+  build:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./host-app
+
+      - name: Build Application
+        run: npm run build
+        working-directory: ./host-app
+
+  # Optional Deployment Job (only on production branch)
+  deploy:
+    if: github.ref == 'refs/heads/prod/v1.0.0'
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./host-app
+
+      - name: Build Application
+        run: npm run build
+        working-directory: ./host-app
+
+      # Example Deployment Step: Deploy to a hosting service (e.g., Vercel, Netlify, Docker registry)
+      - name: Deploy to Vercel
+        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+        working-directory: ./host-app
