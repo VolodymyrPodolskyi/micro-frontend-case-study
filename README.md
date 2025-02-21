@@ -91,9 +91,8 @@ npm run dev
 ```
 
 The applications will be available at:
-- Host Application: `http://localhost:3000`
-- Products Remote: `http://localhost:3001`
-- Basket Remote: `http://localhost:3002`
+`http://localhost:3000`
+
 
 ### Production Mode
 
@@ -204,7 +203,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Version Control
 ```
 ├── main                  # Production branch
-├── develop              # Development branch
 ├── test/v1.0.0         # Test branch
 └── prod/v1.0.0         # Production release branch
 ```
