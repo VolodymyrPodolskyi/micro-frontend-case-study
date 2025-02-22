@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - prod/v1.0.0
-      - main  # If you also want to run on main
+      - main
 
 jobs:
   release:
