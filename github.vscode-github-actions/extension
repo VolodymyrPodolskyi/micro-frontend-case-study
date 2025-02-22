@@ -1,0 +1,11 @@
+# Clean existing installation
+rm -rf node_modules package-lock.json
+
+# Reinstall with exact versions
+npm install --legacy-peer-deps --package-lock-only
+
+# Force lockfile update
+npm install --legacy-peer-deps --force
+
+# Verify installation
+npm ls --all 
