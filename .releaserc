@@ -1,7 +1,13 @@
 {
   "branches": [
-    "prod/v1.0.0",
-    {"name": "main", "channel": "next"},
+    {"name": "prod/v1.0.0", "channel": "latest"},
+    {"name": "main", "channel": "beta"},
     {"name": "test/v1.0.0", "prerelease": true}
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/npm",
+    "@semantic-release/github"
   ]
 } 
