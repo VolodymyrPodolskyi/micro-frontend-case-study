@@ -1,0 +1,7 @@
+{
+  "branches": [
+    "prod/v1.0.0",
+    {"name": "main", "channel": "next"},
+    {"name": "test/v1.0.0", "prerelease": true}
+  ]
+} 
