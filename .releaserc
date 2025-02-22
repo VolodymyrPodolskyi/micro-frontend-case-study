@@ -1,7 +1,7 @@
 {
   "branches": [
-    "prod/v1.0.0",
-    {"name": "main", "channel": "beta"},
+    
+    {"name": "prod/v1.0.0", "channel": "beta"},
     {"name": "test/v1.0.0", "prerelease": "rc"}
   ],
   "plugins": [
